@@ -1,5 +1,6 @@
 import {Routes, Route } from "react-router-dom";
-import logo from './logo.svg';
+import UsersPage from "./Components/UsersPage";
+import UserDetailsPage from "./Components/UserDetailsPage"
 import './App.css';
 
 function App() {
