@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const UserDetailsPage = () => {
   const { userId } = useParams();
-  const { user, setUser } = useState({});
-  console.log(user);
+  const { state } = useLocation();
+  const [user, setUser] = useState({});
+  console.log(state);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
         let response = await axios.get(
-          `http://localhost:3000/details/${userId}`
+          `https://jsonplaceholder.typicode.com/users/${userId}`
         );
         setUser(response.data);
       } catch (error) {
@@ -18,11 +20,18 @@ const UserDetailsPage = () => {
       }
     };
     fetchUser();
-  });
+  }, [userId]);
 
   return (
     <div>
-      <h1>User Details Page {userId}</h1>
+      <li>User: {user.name}</li>
+      <li>ID: {user.id}</li>
+      <li>Email: {user.email}</li>
+      <li>Phone: {user.phone}</li>
+      <li>UserName: {user.username}</li>
+      <li>Website: {user.website}</li>
+      {/* <li>ZipCode: {user.address.street}</li> */}
+      {/* <li>Company: {user.company.name}</li> */}
     </div>
   );
 };
